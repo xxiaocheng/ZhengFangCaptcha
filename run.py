@@ -88,16 +88,15 @@ def image2one_hot(pathname):
     print(np.array(x_train).shape)
     print(np.array(t_train).shape)
 
-    with open('x_test.pickle', 'wb') as f:
+    with open('x_train.pickle', 'wb') as f:
         pickle.dump(x_train, f, -1)
 
-    with open('t_test.pickle', 'wb') as f:
+    with open('t_train.pickle', 'wb') as f:
         pickle.dump(t_train, f, -1)
     
 
 
 if __name__ == '__main__':
-    image2one_hot('验证码/完成')
+     image2one_hot('验证码/未完成')
 
-    # with open(save_file, 'rb') as f:
-    #     dataset = pickle.load(f)
+    
