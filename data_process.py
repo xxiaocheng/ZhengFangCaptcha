@@ -46,7 +46,10 @@ def processImg(inputfile):
     im2=im[:,17:30].flatten().tolist()
     im3=im[:,30:43].flatten().tolist()
     im4=im[:,43:56].flatten().tolist()
-    l=list(inputfile.split('/')[-1].split('.')[0]) 
+    try:
+        l=list(inputfile.split('/')[-1].split('.')[0]) 
+    except:
+        l=[0,0,0,0]
 
     return (im1,im2,im3,im4),(l[0],l[1],l[2],l[3])
 
@@ -54,17 +57,17 @@ def processImg(inputfile):
     # img1=Image.fromarray(da)
     # img1=img1.convert('RGB')
     # img1.save(outputfile)
-def image2one_hot(pathname):
+def image2one_hot(path_name,output_name):
     '''
     将训练数据集保存为 pickle 文件
     '''
-    filename_list=os.listdir(pathname) 
+    filename_list=os.listdir(path_name) 
     x_train=[]
     t_train=[]
     word = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
             'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
     for filename in filename_list:
-        (im1,im2,im3,im4),(a,b,c,d)=processImg(pathname+'/'+filename)
+        (im1,im2,im3,im4),(a,b,c,d)=processImg(path_name+'/'+filename)
         x_train.append(im1)
         t1=[0 for i in range(36)]
         t1[word.index(a)]=1
@@ -85,18 +88,18 @@ def image2one_hot(pathname):
         t4[word.index(d)]=1
         t_train.append(t4)
 
-    print(np.array(x_train).shape)
-    print(np.array(t_train).shape)
+        data=[]
+        data.append(x_train)
+        data.append(t_train)
 
-    with open('x_train.pickle', 'wb') as f:
-        pickle.dump(x_train, f, -1)
+    with open(output_name, 'wb') as f:
+        pickle.dump(data, f, -1)
 
-    with open('t_train.pickle', 'wb') as f:
-        pickle.dump(t_train, f, -1)
+
     
 
-
 if __name__ == '__main__':
-     image2one_hot('验证码/未完成')
+    image2one_hot('验证码/未完成','train_data.pickle')
+    image2one_hot('验证码/完成','test_data.pickle')
 
     

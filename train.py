@@ -2,22 +2,17 @@ from network import TwoLayerNet
 import pickle
 import numpy as np
 
-with open('x_train.pickle', 'rb') as f:
-    x_train = pickle.load(f)
+with open('train_data.pickle', 'rb') as f:
+    train_data = pickle.load(f)
 
-with open('t_train.pickle', 'rb') as f:
-    t_train = pickle.load(f)
 
-with open('x_test.pickle', 'rb') as f:
-    x_test = pickle.load(f)
+with open('test_data.pickle', 'rb') as f:
+    test_data = pickle.load(f)
 
-with open('t_test.pickle', 'rb') as f:
-    t_test = pickle.load(f)
-
-x_train=np.array(x_train)
-t_train=np.array(t_train)
-x_test=np.array(x_test)
-t_test=np.array(t_test)
+x_train=np.array(train_data[0])
+t_train=np.array(train_data[1])
+x_test=np.array(test_data[0])
+t_test=np.array(test_data[1])
 
 print(x_train.shape)
 print(t_train.shape)

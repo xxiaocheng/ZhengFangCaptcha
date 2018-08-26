@@ -146,10 +146,11 @@ class TwoLayerNet:
     def __init__(self, input_size, hidden_size, output_size, weight_init_std = 0.01,params={}):
         # 初始化权重
         self.params = params
-        self.params['W1'] = np.sqrt(2.0 /input_size )* np.random.randn(input_size, hidden_size)
-        self.params['b1'] = np.zeros(hidden_size)
-        self.params['W2'] = np.sqrt(2.0 /hidden_size ) * np.random.randn(hidden_size, output_size) 
-        self.params['b2'] = np.zeros(output_size)
+        if params=={}:
+            self.params['W1'] = np.sqrt(2.0 /input_size )* np.random.randn(input_size, hidden_size)
+            self.params['b1'] = np.zeros(hidden_size)
+            self.params['W2'] = np.sqrt(2.0 /hidden_size ) * np.random.randn(hidden_size, output_size) 
+            self.params['b2'] = np.zeros(output_size)
 
         # 生成层
         self.layers = OrderedDict()
