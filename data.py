@@ -12,7 +12,7 @@ def clearNoise(data):
     for i in range(height):
         for j in range(width):
             if i==0 or i== height-1 or j==0 or j== width-1:
-                data [i][j]=255
+                data [i][j]=1
                 continue
             if data[i][j]==0:
                 num=0
@@ -24,7 +24,7 @@ def clearNoise(data):
                     if da[2]>0 :
                         num+=1
                 if num>4:
-                    data[i][j]=255
+                    data[i][j]=1
 
 def processImg(inputfile):
     '''
@@ -36,7 +36,7 @@ def processImg(inputfile):
     data=img.getdata()
     da=np.array(data,np.int32)
     da[da<=170]=0
-    da[da>170]=255
+    da[da>170]=1
     da=da.reshape((27,72))#图片原始尺寸为(60,180)
     clearNoise(da)
     clearNoise(da)
